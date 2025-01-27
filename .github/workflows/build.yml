@@ -1,0 +1,15 @@
+name: Build and Deploy Packages
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  deployment:
+    name: Build and Deploy
+    uses: ./.github/workflows/jobs.yaml
+    secrets: inherit
