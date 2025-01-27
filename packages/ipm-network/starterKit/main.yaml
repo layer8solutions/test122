@@ -1,0 +1,11 @@
+trigger:
+- main
+
+
+pool:
+  name: 'Default'
+
+extends:
+  template: packages/ipm-network/pipelines/azdo/stages/stage.yaml
+  parameters:
+    serviceConnection: 'sc-horizon-demo'

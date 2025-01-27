@@ -1,0 +1,19 @@
+parameters:
+  serviceConnection: ''
+
+jobs:
+- job: DeployNetwork
+  pool:
+    vmImage: 'ubuntu-latest'
+  steps:
+  - task: AzureCLI@2
+    inputs:
+      azureSubscription: ${{ parameters.serviceConnection }}
+      scriptType: 'bash'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az deployment sub create \
+          --name DeployNetwork \
+          --location westeurope \
+          --template-file main.bicep \
+          --parameters rgName='rg-network-001'

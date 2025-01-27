@@ -1,0 +1,34 @@
+name: SubscriptionDeployment
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+
+  deployResources: 
+    name: "Static validation"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Login to Azure
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+          
+      - name: Set up PowerShell
+        uses: actions/setup-powershell@v1
+        with:
+          pwsh-version: '7.4'
+          modules: 'Az' 
+
+      - name: Run subscription deployment script
+        shell: pwsh
+        run: |
+          ./pipelines/scripts/subscriptionDeployment.ps1 -subscriptionId ${{ secrets.AZURE_SUBSCRIPTION_ID }} -bicepFilePath ./main.bicep

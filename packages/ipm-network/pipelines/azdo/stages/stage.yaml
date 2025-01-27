@@ -1,0 +1,10 @@
+parameters:
+- name: serviceConnection
+  type: string
+
+stages:
+  - stage: Deploy
+    jobs:
+      - template: ../jobs/deploy.yaml
+        parameters:
+          serviceConnection: ${{ parameters.serviceConnection }}

@@ -1,0 +1,10 @@
+{
+  "workingFolder": "packages",
+  "associations": [],
+  "packages": [
+    {
+      "name": "layer8solutions/ipm-network",
+      "version": "0.9.0"
+    }
+  ]
+}
